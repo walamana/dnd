@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "5c414e18f697f34f",
+        "id": "d22a0b305a790c58",
         "type": "tabs",
         "children": [
           {
-            "id": "e685b98fc6f09a44",
+            "id": "bc27c62662a88a47",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Bestiarium/Werwolf.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -64,8 +60,17 @@
               "type": "bookmarks",
               "state": {}
             }
+          },
+          {
+            "id": "4927ae2ca9a887f0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -85,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Bestiarium/Werwolf.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +106,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Bestiarium/Werwolf.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,17 +127,15 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Bestiarium/Werwolf.md"
-              }
+              "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -146,10 +147,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e685b98fc6f09a44",
+  "active": "4927ae2ca9a887f0",
   "lastOpenFiles": [
-    "index.mdx",
     "Bestiarium/Werwolf.md",
+    "index.mdx",
     "Bestiarium",
     "Test.md",
     "Untitled.md"
