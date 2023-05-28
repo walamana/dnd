@@ -10,7 +10,7 @@ export interface Props {
 
 const { title } = Astro.props;
 
-const pages: {path: string[], title: string, url: string}[]= (await Astro.glob("./../pages/**/*.mdx")).map(p => {
+const pages: {path: string[], title: string, url: string}[]= (await Astro.glob("./../pages/**/*.md*")).map(p => {
     const path = p.url.split("/");
     path.splice(0, 1)
     path.splice(path.length - 1, 1)
