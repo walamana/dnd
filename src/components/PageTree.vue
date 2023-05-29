@@ -1,7 +1,7 @@
 <template>
 
   <div class="tree_part" :class="{collapsed, 'is_root': root.name === '#root'}">
-      <a class="header" :class="classes" :href="root.title ? (root.url + '/' ) : null" @click="collapsed = !collapsed" v-if="root.name !== '#root'">
+      <a class="header" :class="classes" :href="root.title ? (root.url + '/' ) : null" @click.stop="collapsed = !collapsed" v-if="root.name !== '#root'">
           <i class="material-symbols-outlined" :class="root.name ? 'dir' : 'file'">{{ root.name ? "folder" : "article" }}</i>
           <span class="name">{{root.name ? root.name : root.title}}</span>
       </a>
