@@ -44,7 +44,7 @@ export default {
     .header{
         display: flex;
         align-items: center;
-        height: 30px;
+        padding: 8px 0;
         user-select: none;
         cursor: pointer;
         text-decoration: none;
@@ -59,6 +59,7 @@ export default {
             font-size: 16px;
             opacity: 0.3;
             transition: 100ms opacity;
+            width: 20px;
         }
         .name {
             opacity: 0.6;

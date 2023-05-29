@@ -1,6 +1,7 @@
 ---
-import PageTree from "../components/PageTree.vue";
 import PathNavigator from "../components/PathNavigator.vue";
+import SidePanel from "../components/SidePanel.vue";
+
 
 
 
@@ -71,13 +72,12 @@ let parts = Astro.url.pathname
     </head>
     <body>
         <div class="page">
-            <div class="side">
-
-                <PageTree root={pageTree} client:load/>
-            </div>
+            <SidePanel client:load pageTree={pageTree}/>
             <div class="content">
-                <PathNavigator parts={parts}/>
-                <slot/>
+                <div class="block">
+                    <PathNavigator parts={parts}/>
+                    <slot/>
+                </div>
             </div>
         </div>
     </body>
@@ -87,22 +87,52 @@ let parts = Astro.url.pathname
     :root{
         --surface-color: #121212;
         --color-on-surface: #faf9f3;
-        --color-on-surface-o10: rgba(250, 249, 243, 0.10)
+        --color-on-surface-text: #c5c5be;
+        --color-on-surface-o10: rgba(250, 249, 243, 0.10);
+        --color-link: #0d87ce;
     }
-    html, body {
+    body {
         margin: 0;
         background-color: var(--surface-color);
         color: var(--color-on-surface);
         font-family: "Roboto", sans-serif;
+        padding-top: 50px;
+        width: 100vw;
     }
     .page {
         display: flex;
-    }
-    .side{
-        min-width: 200px;
-        margin: 20px 40px;
+        width: 100%;
     }
     .content{
+        width: 100%;
         margin: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .content .block {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .block h1:first-of-type {
+        margin-top: 0;
+    }
+
+    p {
+        line-height: 22px;
+        color: var(--color-on-surface-text);
+        text-align: justify;
+    }
+
+    a {
+        color: var(--color-link);
+    }
+
+    img{
+        max-width: 100%;
+    }
+    img[alt=small]{
+        width: 20%;
     }
 </style>
+

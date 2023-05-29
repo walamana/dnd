@@ -1,6 +1,6 @@
 <template>
 
-  <span class="path">
+  <span class="path" v-if="parts && parts.length > 0">
       <span v-for="part in parts"> {{ part }} / </span>
   </span>
 
@@ -24,9 +24,11 @@ export default {
 <style lang="less" scoped>
 
 .path {
+  display: block;
   span {
     opacity: 0.4;
   }
+  padding-bottom: 30px;
 }
 
 </style>
