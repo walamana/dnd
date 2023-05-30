@@ -1,6 +1,6 @@
 <template>
 
-  <div class="tree_part" :class="{collapsed, 'is_root': root.name === '#root'}">
+  <div class="tree_part" :class="{collapsed: collapsed && (root.name !== '#root'), 'is_root': root.name === '#root'}">
       <a class="header" :class="classes" :href="root.title ? (root.url + '/' ) : null" @click.stop="collapsed = !collapsed" v-if="root.name !== '#root'">
           <i class="material-symbols-outlined" :class="root.name ? 'dir' : 'file'">{{ root.name ? "folder" : "article" }}</i>
           <span class="name">{{root.name ? root.name : root.title}}</span>
@@ -22,7 +22,7 @@ export default {
                 dir: !!this.root.name,
                 file: !this.root.name
             },
-            collapsed: false
+            collapsed: true
         }
     },
     mounted() {
@@ -60,6 +60,7 @@ export default {
             opacity: 0.3;
             transition: 100ms opacity;
             width: 20px;
+            flex-shrink: 0;
         }
         .name {
             opacity: 0.6;

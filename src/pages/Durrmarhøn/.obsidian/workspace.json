@@ -1,18 +1,22 @@
 {
   "main": {
-    "id": "9f3252760510aa86",
+    "id": "176e293e1ca16d6a",
     "type": "split",
     "children": [
       {
-        "id": "d22a0b305a790c58",
+        "id": "227247c8b3ea5cbc",
         "type": "tabs",
         "children": [
           {
-            "id": "bc27c62662a88a47",
+            "id": "a6ead79fb8d64b52",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Kins/Kin Knowles.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -21,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "684ee7fbc37ab83c",
+    "id": "5f8e88a4d8ce0583",
     "type": "split",
     "children": [
       {
-        "id": "ad56a91af03abedb",
+        "id": "b0fcf611c0df1920",
         "type": "tabs",
         "children": [
           {
-            "id": "df9139dfb7b54bf0",
+            "id": "fea4c4fdc52915dd",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -39,7 +43,7 @@
             }
           },
           {
-            "id": "f92211b8bdfd031b",
+            "id": "2ca0685b1a9c6a91",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -54,42 +58,42 @@
             }
           },
           {
-            "id": "7c3d314ac7408bb4",
+            "id": "71e70ed3cebb5346",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "b74b841f6b86dca1",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
               "state": {}
             }
-          },
-          {
-            "id": "4927ae2ca9a887f0",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {}
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
     "width": 300
   },
   "right": {
-    "id": "86f4d20972813d19",
+    "id": "ed4156ae448eeb2b",
     "type": "split",
     "children": [
       {
-        "id": "ea15bba1b8ed7e9d",
+        "id": "a01be805b6a9cdac",
         "type": "tabs",
         "children": [
           {
-            "id": "329338beb7309751",
+            "id": "63d14e8291697656",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Kins/Kin Knowles.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -101,18 +105,19 @@
             }
           },
           {
-            "id": "fa0e2d75de265190",
+            "id": "5a0cb9ec0f9173c2",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Kins/Kin Knowles.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "407b87f6e445c016",
+            "id": "932fe7b98e331bea",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -123,19 +128,21 @@
             }
           },
           {
-            "id": "2e83de649b8d16b6",
+            "id": "d67f857dbb25d8e8",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Kins/Kin Knowles.md"
+              }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -147,17 +154,40 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4927ae2ca9a887f0",
+  "active": "a6ead79fb8d64b52",
   "lastOpenFiles": [
-    "Bestiarium/index.mdx~",
-    "Bestiarium/index.mdx",
-    "index.mdx~",
-    "testfile.mdx~",
-    "testfile.mdx",
-    "Bestiarium/Werwolf.md",
-    "index.mdx",
-    "Bestiarium",
-    "Test.md",
-    "Untitled.md"
+    "Kins/Kin Hooke.md",
+    "Kins/Kin Knowles.md",
+    "Kins/Kin Greenslade.md",
+    "Kins/Kin Eade.md",
+    "Kins/Kin Fayne.md",
+    "Kingdoms/Pitch.md",
+    "Kingdoms/Growthe.md",
+    "Untitled.canvas",
+    "2023-03-29.md",
+    "Untitled 1.canvas",
+    "Kingdoms/Molten Shore.md",
+    "Districts of Molten Shore/The Linked Land.md",
+    "Districts of Molten Shore/Crab.md",
+    "Districts of Molten Shore/The Shrapnell (District of Pitch).md",
+    "Districts of Molten Shore/The Tooth.md",
+    "Districts of Molten Shore/Eldre Coast.md",
+    "Districts of Molten Shore/Middle Arch.md",
+    "Districts of Molten Shore/Peak.md",
+    "Districts of Molten Shore/Swornland.md",
+    "Districts of Molten Shore/The Hat.md",
+    "Districts of Molten Shore/The Shore.md",
+    "Districts of Molten Shore",
+    "No Man's Lands/Island of Sacery.md",
+    "No Man's Lands/Desert of Aelouye.md",
+    "No Man's Lands/Lands of Soil.md",
+    "Kingdoms/Southern Domain.md",
+    "Kingdoms/Placid Bleak.md",
+    "No Man's Lands/Hydean Hideout.md",
+    "No Man's Lands",
+    "Kingdoms",
+    "Surnames",
+    "Lordships",
+    "Kins"
   ]
 }

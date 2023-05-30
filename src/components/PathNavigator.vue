@@ -1,7 +1,9 @@
 <template>
 
   <span class="path" v-if="parts && parts.length > 0">
-      <span v-for="part in parts"> {{ part }} / </span>
+      <span v-for="path in parts">
+          <a :href="path.url" v-if="path.url">{{ path.name }}</a><span v-else>{{path.name}}</span> /
+      </span>
   </span>
 
 </template>
@@ -10,14 +12,15 @@
 export default {
     name: "PathNavigator",
     props: ["parts"],
-    computed: {
-        parts() {
-            let segments = this.$props.parts.split("/");
-            segments.splice(0, 1)
-            segments.splice(segments.length - 1, 1)
-            return segments
+    methods: {
+        backpoints(n) {
+            let s = ""
+            for(let i = 0; i < n+1; i++) {
+                s += "../";
+            }
+            return s;
         }
-    },
+    }
 }
 </script>
 
@@ -26,7 +29,7 @@ export default {
 .path {
   display: block;
   span {
-    opacity: 0.4;
+    opacity: 0.7;
   }
   padding-bottom: 30px;
 }

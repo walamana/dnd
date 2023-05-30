@@ -13,9 +13,15 @@ const { title } = Astro.props;
 
 const pages: {path: string[], title: string, url: string}[]= (await Astro.glob("./../pages/**/*.md*")).map(p => {
     const path = p.url.split("/");
+
+    // console.log(p.file ,path)
     path.splice(0, 1)
-    path.splice(path.length - 1, 1)
-    const title = p.getHeadings().length > 0 ? p.getHeadings()[0].text : "Ohne Titel";
+
+    const filePathParts = p.file.split("/");
+    if(!filePathParts[filePathParts.length - 1].includes("index")){
+        path.splice(path.length - 1, 1)
+    }
+    const title = p.getHeadings().length > 0 ? p.getHeadings()[0].text : filePathParts[filePathParts.length - 1];
     return{path, title, url: p.url}
 })
 
@@ -53,6 +59,33 @@ for(let page of pages) {
 }
 
 let parts = Astro.url.pathname
+
+let path = []
+let curUrl = ""
+let cur = pageTree.children
+let partsToCheck = Astro.url.pathname.replaceAll(/(^\/|\/$)/g, "").split("/");
+partsToCheck.splice(partsToCheck.length - 1, );
+for(let part of partsToCheck) {
+    if(part == "") continue;
+    curUrl += "/" + part;
+    part = decodeURI(part)
+
+    let n = cur.find(f => f.name === part);
+    cur = n ? n.children : null
+
+    let containsIndex = cur && cur.find(f => f.title === part) != null
+
+    path.push({
+        url: containsIndex ? curUrl : undefined,
+        name: part
+    })
+
+    console.log("Cur", decodeURI(part), cur ? cur.length : -1, containsIndex)
+
+}
+
+console.log(path)
+
 ---
 
 <!DOCTYPE html>
@@ -75,7 +108,7 @@ let parts = Astro.url.pathname
             <SidePanel client:load pageTree={pageTree}/>
             <div class="content">
                 <div class="block">
-                    <PathNavigator parts={parts}/>
+                    <PathNavigator parts={path}/>
                     <slot/>
                 </div>
             </div>
@@ -133,6 +166,11 @@ let parts = Astro.url.pathname
     }
     img[alt=small]{
         width: 20%;
+    }
+    img[alt=header] {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
     }
 </style>
 

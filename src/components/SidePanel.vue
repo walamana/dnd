@@ -42,6 +42,7 @@ export default {
 .side{
     display: flex;
     flex-shrink: 0;
+    max-width: 300px;
     height: 100%;
     position: sticky;
     top: 0;
