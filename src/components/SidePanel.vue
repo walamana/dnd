@@ -1,6 +1,14 @@
 <template>
     <div class="toolbar">
-        <i class="material-symbols-outlined menu" @click="opened = !opened">menu</i>
+        <div class="left">
+            <i class="material-symbols-outlined menu" @click="opened = !opened">menu</i>
+            <h3>
+                Children of Durrmarhøn
+                <span class="username" v-if="username">- {{username}}</span>
+            </h3>
+
+        </div>
+        <i class="material-symbols-outlined menu" @click="logout">logout</i>
     </div>
     <div class="side" :class="{opened}" @click="opened = false">
         <div class="page-tree">
@@ -18,10 +26,24 @@ export default {
     props: ["pageTree"],
     data: function() {
         return {
-            opened: false
+            opened: false,
+            username: null
+        }
+    },
+    mounted() {
+        console.log(document)
+        this.username = document.cookie.split(";").find(c => {
+            return c.trim().startsWith("user=");
+        }).replace("user=", "")
+    },
+    methods: {
+        logout(){
+            document.cookie = "user=;expires=Thu, 01 Jan 1970 00:00:01 GMT"
+            document.location.reload()
         }
     }
 }
+
 </script>
 
 <style lang="less" scoped>
@@ -30,14 +52,35 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     padding: 10px 20px;
     background: var(--surface-color);
     opacity: 1;
     user-select: none;
     cursor: pointer;
-    display: none;
     border-bottom: 1px solid #2f2f2f;
+
+    display: flex;
+    width: calc(100% - 40px);
+    z-index: 101;
+    .left {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        h3{
+            display: inline-flex;
+            justify-content: start;
+            align-items: center;
+            margin: 0 0 0 20px;
+            padding: 0;
+            .username {
+                margin-left: 5px;
+                opacity: 0.5;
+            }
+        }
+    }
+    .right {
+        flex-shrink: 0;
+    }
 }
 .side{
     display: flex;
@@ -45,7 +88,7 @@ export default {
     max-width: 300px;
     height: 100%;
     position: sticky;
-    top: 0;
+    top: 44px;
     .page-tree {
         display: block;
         padding: 14px 40px 20px 36px;
@@ -54,12 +97,9 @@ export default {
 }
 
 @media (max-width: 800px) {
-    .toolbar {
-        display: block;
-        z-index: 101;
-    }
     .side {
         width: 100%;
+        max-width: none;
         position: fixed;
         top: 0;
         left: 0;

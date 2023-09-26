@@ -1,0 +1,18 @@
+---
+
+import MainLayout from "../layouts/MainLayout.astro";
+import ChipInput from "../components/ChipInput.vue"
+
+---
+
+<MainLayout>
+
+    <h2>Zugriff erteilen</h2>
+
+    <div class="access">
+        <input placeholder="Wikieintrag">
+        <input placeholder="Nutzer"/>
+        <ChipInput client:load/>
+    </div>
+
+</MainLayout>

@@ -3,174 +3,181 @@ import PathNavigator from "../components/PathNavigator.vue";
 import SidePanel from "../components/SidePanel.vue";
 
 
-
-
 export interface Props {
     title: string;
 }
 
-const { title } = Astro.props;
+const {title} = Astro.props;
 
-const pages: {path: string[], title: string, url: string}[]= (await Astro.glob("./../pages/**/*.md*")).map(p => {
-    const path = p.url.split("/");
 
-    // console.log(p.file ,path)
-    path.splice(0, 1)
-
-    const filePathParts = p.file.split("/");
-    if(!filePathParts[filePathParts.length - 1].includes("index")){
-        path.splice(path.length - 1, 1)
-    }
-    const title = p.getHeadings().length > 0 ? p.getHeadings()[0].text : filePathParts[filePathParts.length - 1];
-    return{path, title, url: p.url}
-})
-
-interface Page {
-    title: String,
-    url: String
-}
-interface Directory{
-    name: string,
-    children: (Directory | Page)[]
-}
-
-let pageTree: Directory = {
-    name: "#root",
-    children: []
-}
-
-for(let page of pages) {
-    var root = pageTree;
-    for(let sub of page.path) {
-
-        let subdir: Directory = <Directory> root.children.find(c => c["name"] == sub)
-
-        if(!subdir) {
-            subdir = {
-                name: sub,
-                children: []
-            }
-            root.children.push(subdir)
-        }
-        root = subdir
-    }
-
-    root.children.push({title: page.title, url: page.url})
-}
+let pageTree = Astro.locals.pageTree
 
 let parts = Astro.url.pathname
-
 let path = []
-let curUrl = ""
-let cur = pageTree.children
-let partsToCheck = Astro.url.pathname.replaceAll(/(^\/|\/$)/g, "").split("/");
-partsToCheck.splice(partsToCheck.length - 1, );
-for(let part of partsToCheck) {
-    if(part == "") continue;
-    curUrl += "/" + part;
-    part = decodeURI(part)
 
-    let n = cur.find(f => f.name === part);
-    cur = n ? n.children : null
-
-    let containsIndex = cur && cur.find(f => f.title === part) != null
-
-    path.push({
-        url: containsIndex ? curUrl : undefined,
-        name: part
-    })
-
-    console.log("Cur", decodeURI(part), cur ? cur.length : -1, containsIndex)
-
+if (pageTree) {
+    calculatePath()
 }
 
-console.log(path)
+function calculatePath() {
+    let curUrl = ""
+    let cur = pageTree.children
+    let partsToCheck = Astro.url.pathname.replaceAll(/(^\/|\/$)/g, "").split("/");
+    partsToCheck.splice(partsToCheck.length - 1,);
+    for (let part of partsToCheck) {
+        if (part == "") continue;
+        curUrl += "/" + part;
+        part = decodeURI(part)
 
+        let n = cur.find(f => f.name === part);
+        cur = n ? n.children : null
+
+        let containsIndex = cur && cur.find(f => f.title === part) != null
+
+        path.push({
+            url: containsIndex ? curUrl : undefined,
+            name: part
+        })
+
+        console.log("Cur", decodeURI(part), cur ? cur.length : -1, containsIndex)
+
+    }
+}
 ---
 
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="Astro description">
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <title>{title}</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Astro description">
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <meta name="generator" content={Astro.generator}/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <title>{title}</title>
 
-    </head>
-    <body>
-        <div class="page">
-            <SidePanel client:load pageTree={pageTree}/>
-            <div class="content">
-                <div class="block">
-                    <PathNavigator parts={path}/>
-                    <slot/>
-                </div>
-            </div>
+</head>
+<body>
+<div class="page">
+    <SidePanel client:load pageTree={pageTree}/>
+    <div class="content">
+        <div class="block">
+            <PathNavigator client:load parts={path}/>
+            <slot/>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>
 
-<style is:global>
-    :root{
-        --surface-color: #121212;
-        --color-on-surface: #faf9f3;
-        --color-on-surface-text: #c5c5be;
-        --color-on-surface-o10: rgba(250, 249, 243, 0.10);
-        --color-link: #0d87ce;
-    }
-    body {
-        margin: 0;
-        background-color: var(--surface-color);
-        color: var(--color-on-surface);
-        font-family: "Roboto", sans-serif;
-        padding-top: 50px;
-        width: 100vw;
-    }
-    .page {
-        display: flex;
-        width: 100%;
-    }
-    .content{
-        width: 100%;
-        margin: 20px;
-        display: flex;
-        justify-content: center;
-    }
-    .content .block {
-        width: 100%;
-        max-width: 600px;
-    }
+<style is:global lang="less">
+  :root {
+    --surface-color: #090910;
+    --color-on-surface: rgb(231, 209, 177);
+    --color-on-surface-light: rgba(231, 209, 177, 0.25);
+    --color-on-surface-text: #faf9f6;
+    --color-on-surface-o10: rgba(250, 249, 243, 0.10);
+    --color-link: #0d87ce;
+  }
 
-    .block h1:first-of-type {
-        margin-top: 0;
-    }
+  body {
+    margin: 0;
+    background-color: var(--surface-color);
+    color: var(--color-on-surface);
+    font-family: "Lora", serif;
+    padding-top: 50px;
+    width: 100vw;
+  }
 
-    p {
-        line-height: 22px;
-        color: var(--color-on-surface-text);
-        text-align: justify;
-    }
+  .page {
+    display: flex;
+    width: 100%;
+  }
 
-    a {
-        color: var(--color-link);
-    }
+  .content {
+    width: 100%;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+  }
 
-    img{
-        max-width: 100%;
+  .content .block {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .block h1:first-of-type {
+    margin-top: 0;
+    font-size: 42px;
+  }
+
+  .block h1:first-of-type::after {
+    content: '';
+    display: block;
+    margin-top: 16px;
+    height: 1px;
+    width: 100%;
+    background: var(--color-on-surface-text);
+  }
+
+  h1 {
+    font-weight: 300;
+  }
+
+  h2 {
+    position: sticky;
+    top: 42px;
+    background: var(--surface-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0;
+
+    &.stuck {
+      background: red;
     }
-    img[alt=small]{
-        width: 20%;
-    }
-    img[alt=header] {
-        height: 200px;
-        width: 100%;
-        object-fit: cover;
-    }
+  }
+
+  h2::before {
+    content: "◈";
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    margin-right: 10px;
+    font-size: 20px;
+    top: 22px;
+    left: -30px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 24px;
+    color: var(--color-on-surface-text);
+    text-align: justify;
+    font-family: "Roboto", sans-serif;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  img[alt=small] {
+    width: 20%;
+  }
+
+  img[alt=header] {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
 </style>
 

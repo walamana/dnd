@@ -1,0 +1,9 @@
+{
+  "": "*",
+  "/": "*",
+  "/Bestiarium": ["Jonas"],
+  "/Regelwerk": "*",
+  "/Bestiarium/Werwolf": ["Jonas"],
+  "/login": "*",
+  "/admin": "*"
+}
