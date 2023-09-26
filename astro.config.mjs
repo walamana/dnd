@@ -16,6 +16,6 @@ export default defineConfig({
     remarkPlugins: [defaultLayout],
     extendDefaultPlugins: true
   },
-  output: "hybrid",
+  output: "server",
   adapter: netlify()
 });
